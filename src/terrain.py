@@ -18,7 +18,7 @@ class Terrain(pygame.sprite.Sprite):
         :param position: position of the block
         """
         super().__init__()
-        self.image = pygame.image.load(image_path)
+        self.image = pygame.image.load(image_path).convert_alpha()
         self.image = pygame.transform.scale(self.image, (64, 64))
         self.rect = self.image.get_rect()
         self.rect.topleft = position

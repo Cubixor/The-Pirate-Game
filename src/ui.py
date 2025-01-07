@@ -8,7 +8,7 @@ BTN_PATH = 'resources/ui/button.png'
 
 class LostUI:
     def __init__(self):
-        bg = pygame.image.load(BG_PATH)
+        bg = pygame.image.load(BG_PATH).convert_alpha()
         self.bg = pygame.transform.scale(bg, (bg.get_width() * 4, bg.get_height() * 4))
         self.bg_loc = (c.WINDOW[0] // 2 - self.bg.get_width() // 2, c.WINDOW[1] // 2 - self.bg.get_height() // 2)
 
@@ -27,13 +27,13 @@ class LostUI:
 
 class StartUI:
     def __init__(self):
-        bg = pygame.image.load(BG_PATH)
+        bg = pygame.image.load(BG_PATH).convert_alpha()
         self.bg = pygame.transform.scale(bg, (bg.get_width() * 4, bg.get_height() * 4))
         self.bg_loc = (c.WINDOW[0] // 2 - self.bg.get_width() // 2, c.WINDOW[1] // 2 - self.bg.get_height() // 2)
 
         font = pygame.font.Font(None, 34)
 
-        btn = pygame.image.load(BTN_PATH)
+        btn = pygame.image.load(BTN_PATH).convert_alpha()
         self.button = pygame.transform.scale(btn, (btn.get_width() * 6, btn.get_height() * 6))
         self.button_loc = (c.WINDOW[0] // 2 - self.button.get_width() // 2, c.WINDOW[1] // 2 - self.button.get_height() // 2)
         self.text = font.render('START', True, (0, 0, 0))

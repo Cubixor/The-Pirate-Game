@@ -130,7 +130,8 @@ def gen_ship_chunk(pos):
     chunk.entities.add(ship)
     return chunk
 
-chunk_types = [gen_shell_chunk, gen_star_chunk, gen_tower_chunk, gen_gap_chunk, gen_ship_chunk]
+#chunk_types = [gen_shell_chunk, gen_star_chunk, gen_tower_chunk, gen_gap_chunk, gen_ship_chunk]
+chunk_types = [gen_gap_chunk, gen_tower_chunk]
 prev_chunk = gen_gap_chunk
 
 def gen_chunk(pos):

@@ -21,7 +21,7 @@ class Animation:
             image_path = glob(os.path.join(v, '*.png'))
             self.images[k] = []
             for path in image_path:
-                img = pygame.image.load(path)
+                img = pygame.image.load(path).convert_alpha()
                 scaled = pygame.transform.scale(img, (img.get_width() * scale, img.get_height() * scale))
                 self.images[k].append(scaled)
 

@@ -175,6 +175,8 @@ def main():
         generate_chunks(chunks)
         check_chunk_collisions(player, chunks)
 
+        #screen.fill((0, 0, 0))
+
         background.draw(screen, player.health)
 
         for chunk in chunks:
@@ -197,6 +199,11 @@ def main():
         all_sprites.draw(screen)
 
         pygame.display.flip()
+
+        fps = int(clock.get_fps())
+        if fps < 50:
+            print(fps)
+
         clock.tick(60)
 
 

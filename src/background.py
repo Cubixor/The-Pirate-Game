@@ -13,11 +13,11 @@ HEALTH_BAR_PATH = 'resources/ui/health.png'
 
 class ScrollingBackground:
     def __init__(self, speed):
-        bg_img = pygame.image.load(BG_PATH)
+        bg_img = pygame.image.load(BG_PATH).convert()
         bg_scaled = pygame.transform.scale(bg_img, c.WINDOW)
         self.bg_img = bg_scaled
 
-        cloud_img = pygame.image.load(CLOUD_PATH)
+        cloud_img = pygame.image.load(CLOUD_PATH).convert_alpha()
         cloud_scaled = pygame.transform.scale(cloud_img, (cloud_img.get_width() * 3, cloud_img.get_height() * 3))
         self.cloud_img = cloud_scaled
 
@@ -29,7 +29,7 @@ class ScrollingBackground:
         self.x1 = 0
         self.x2 = -self.cloud_img.get_width()
 
-        health_img = pygame.image.load(HEALTH_BAR_PATH)
+        health_img = pygame.image.load(HEALTH_BAR_PATH).convert_alpha()
         health_img_scaled = pygame.transform.scale(health_img, (health_img.get_width() * 4, health_img.get_height() * 4))
         self.health_bar = health_img_scaled
 
