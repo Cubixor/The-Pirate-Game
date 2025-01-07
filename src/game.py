@@ -139,7 +139,9 @@ def update_chunk(screen, chunk, player):
 
 
 def main():
-    pygame.init()
+    pygame.display.init()
+    pygame.font.init()
+
     screen = pygame.display.set_mode(c.WINDOW)
     pygame.display.set_caption("The pirate game")
 
