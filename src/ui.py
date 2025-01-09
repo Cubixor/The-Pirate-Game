@@ -6,6 +6,10 @@ LOST_PATH = 'resources/ui/lost.png'
 
 
 class LostUI:
+    """
+    Class for displaying the lost UI
+    """
+
     def __init__(self, dims):
         bg = pygame.image.load(BG_PATH).convert_alpha()
         self.bg = pygame.transform.scale(bg, (bg.get_width() * 4, bg.get_height() * 4))
@@ -19,6 +23,10 @@ class LostUI:
         self.btn_rect = self.btn.get_rect().move(self.btn_loc)
 
     def on_click(self):
+        """
+        Handle 'play again' button click
+        :return:
+        """
         # Check if clicked on btn
         mouse_pos = pygame.mouse.get_pos()
         if pygame.mouse.get_pressed()[0] and self.btn_rect.collidepoint(mouse_pos[0], mouse_pos[1]):

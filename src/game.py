@@ -144,11 +144,20 @@ class Game:
         self.damaged = False
 
     def handle_lost(self):
+        """
+        Handle the lost state
+        :return:
+        """
         self.lost_ui.draw(self.screen)
         if self.lost_ui.on_click():
             self.__init__()
 
     def damage_player(self):
+        """
+        Damage the player - reduce health, shake the screen,
+         add red overlay and play the damage sound
+        :return:
+        """
         self.player.health -= 2
         self.red_overlay.draw(self.screen)
         screen_shake(self.screen)
@@ -159,6 +168,10 @@ class Game:
             self.loose()
 
     def loose(self):
+        """
+        Change to the lost state
+        :return:
+        """
         self.lost = True
         self.player.health = 0
         self.background.draw_health_bar(self.screen, self.player.health)
@@ -195,6 +208,10 @@ class Game:
             chunk.entities.remove()
 
     def handle_loop(self):
+        """
+        Handle the main game loop
+        :return:
+        """
         if self.lost:
             self.handle_lost()
             return

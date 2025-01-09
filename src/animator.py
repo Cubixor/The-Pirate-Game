@@ -86,10 +86,18 @@ class Animation:
 
 
 class DamageOverlay:
+    """
+    Class for displaying red overlay when player is hit
+    """
     def __init__(self, dim):
         self.red_overlay = pygame.Surface(dim)
         self.red_overlay.set_alpha(64)
         self.red_overlay.fill((255, 0, 0))
 
     def draw(self, screen):
+        """
+        Draws the overlay on the screen
+        :param screen: screen to draw on
+        :return:
+        """
         screen.blit(self.red_overlay, (0, 0))

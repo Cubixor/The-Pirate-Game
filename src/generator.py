@@ -129,7 +129,8 @@ def gen_star_chunk(pos, window):
     """
     platform_height = random.randint(2, 3)
     chunk = Chunk(gen_star_grid(platform_height), pos)
-    star = entities.Star((pos[0] + 128, window[1] - platform_height * 64), pos[0], chunk.get_end_position())
+    star_pos = (pos[0] + 128, window[1] - platform_height * c.BLOCK_SIZE)
+    star = entities.Star(star_pos, pos[0], chunk.get_end_position())
     chunk.entities.add(star)
     return chunk
 
@@ -143,7 +144,8 @@ def gen_shell_chunk(pos, window):
     """
     platform_height = random.randint(2, 3)
     chunk = Chunk(gen_shell_grid(platform_height), pos)
-    shell = entities.Shell((int(chunk.width / 1.5) * 64 + pos[0] - 64, window[1] - platform_height * 64))
+    shell_pos = int(chunk.width / 1.5) * c.BLOCK_SIZE + pos[0] - c.BLOCK_SIZE, window[1] - platform_height * c.BLOCK_SIZE
+    shell = entities.Shell(shell_pos)
     chunk.entities.add(shell)
     return chunk
 
@@ -157,7 +159,8 @@ def gen_crab_chunk(pos, window):
     """
     platform_height = random.randint(2, 3)
     chunk = Chunk(gen_crab_grid(platform_height), pos)
-    crab = entities.Crab((int(chunk.width / 1.5) * 64 + pos[0] - 64, window[1] - platform_height * 64))
+    crab_pos = int(chunk.width / 1.5) * c.BLOCK_SIZE + pos[0] - c.BLOCK_SIZE, window[1] - platform_height * c.BLOCK_SIZE
+    crab = entities.Crab(crab_pos)
     chunk.entities.add(crab)
     return chunk
 
@@ -197,6 +200,10 @@ CHUNK_TYPES = [
 
 
 class ChunkGenerator:
+    """
+    Class used for randomly generating new chunks
+    """
+
     def __init__(self, dims):
         self.available_chunk_types = list(CHUNK_TYPES)
         self.prev_chunk = gen_gap_chunk

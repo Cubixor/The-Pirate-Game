@@ -67,6 +67,7 @@ class Star(Entity):
     causing damage to the player when touched
     """
     WAIT_TIME = 30
+    MOVE_STEP = 12
 
     def __init__(self, pos, bound_start, bound_end):
         """
@@ -101,11 +102,11 @@ class Star(Entity):
             return
 
         if self.rect.right >= self.bound_end:
-            self.velocity_x = -c.STAR_MOVE_STEP
+            self.velocity_x = -self.MOVE_STEP
             self.animation.change_direction(False)
             self.pause()
         elif self.rect.left <= self.bound_start:
-            self.velocity_x = c.STAR_MOVE_STEP
+            self.velocity_x = self.MOVE_STEP
             self.animation.change_direction(True)
             self.pause()
 
@@ -227,6 +228,8 @@ class Ship(Entity):
     It moves back and forth, making it possible to travel on it
     """
 
+    MOVE_STEP = 4
+
     def __init__(self, pos, bound_start, bound_end):
         """
         Initialize the ship entity
@@ -247,10 +250,10 @@ class Ship(Entity):
         super().update()
 
         if self.rect.right >= self.bound_end:
-            self.velocity_x = -c.SHIP_MOVE_STEP
+            self.velocity_x = -self.MOVE_STEP
             self.animation.change_direction(True)
         elif self.rect.left <= self.bound_start:
-            self.velocity_x = c.SHIP_MOVE_STEP
+            self.velocity_x = self.MOVE_STEP
             self.animation.change_direction(False)
 
     def scroll(self, dx):

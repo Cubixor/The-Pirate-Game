@@ -12,6 +12,11 @@ HEALTH_BAR_PATH = 'resources/ui/health.png'
 
 
 class ScrollingBackground:
+    """
+    Class for displaying a scrolling background
+    along with the health bar
+    """
+
     def __init__(self, dims):
         self.window = dims
 

@@ -19,7 +19,7 @@ class Terrain(pygame.sprite.Sprite):
         """
         super().__init__()
         self.image = pygame.image.load(image_path).convert_alpha()
-        self.image = pygame.transform.scale(self.image, (64, 64))
+        self.image = pygame.transform.scale(self.image, (c.BLOCK_SIZE, c.BLOCK_SIZE))
         self.rect = self.image.get_rect()
         self.rect.topleft = position
 
@@ -78,7 +78,7 @@ class Chunk:
         """
         :return: the x-coordinate of the end of the chunk
         """
-        return self.position[0] + self.width * 64
+        return self.position[0] + self.width * c.BLOCK_SIZE
 
     def draw(self, screen):
         """
