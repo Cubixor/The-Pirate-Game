@@ -10,6 +10,7 @@ class Animation:
     """
     Class for animating objects
     """
+
     def __init__(self, image_paths, scale=3):
         """
         Initialize the object with the images
@@ -82,3 +83,13 @@ class Animation:
         :return: how long a full animation cycle takes
         """
         return c.ANIMATION_SPEED * (len(self.images[self.curr_state]) - 1)
+
+
+class DamageOverlay:
+    def __init__(self, dim):
+        self.red_overlay = pygame.Surface(dim)
+        self.red_overlay.set_alpha(64)
+        self.red_overlay.fill((255, 0, 0))
+
+    def draw(self, screen):
+        screen.blit(self.red_overlay, (0, 0))

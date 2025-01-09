@@ -1,15 +1,18 @@
 import random
+
 import pygame
 
 import constants as c
 from animator import Animation
+from src.constants import JUMP_HEIGHT
+
 
 class Entity(pygame.sprite.Sprite):
     """
     Base class for all entities in the game
     """
 
-    def __init__(self, animation, pos=(c.WINDOW[0] // 2, c.WINDOW[1] // 2), gravity=True, collisions=False):
+    def __init__(self, animation, pos, gravity=True, collisions=False):
         """
         Initialize the entity
         :param animation: animation object
@@ -44,10 +47,6 @@ class Entity(pygame.sprite.Sprite):
             self.velocity_y += c.GRAVITY  # Adjust gravity effect
         self.rect.y += self.velocity_y
         self.rect.x += self.velocity_x
-
-        if self.rect.bottom > c.WINDOW[1]:
-            self.rect.bottom = c.WINDOW[1]
-            self.velocity_y = 0  # Reset velocity when on the ground
 
     def update(self, move=True):
         """
@@ -213,7 +212,9 @@ class Shell(Entity):
             self.curr_state_timer = self.animation.get_full_time()
 
             if self.state == 'shoot':
-                bullet = Bullet(self.rect.midleft)
+                bullet_pos = list(self.rect.midleft)
+                bullet_pos[1] += 10
+                bullet = Bullet(bullet_pos)
                 self.groups()[0].add(bullet)
 
             if self.state == 'bite':
@@ -262,22 +263,77 @@ class Ship(Entity):
         self.bound_end -= dx
 
 
+class Crab(Entity):
+    """
+    Star entity
+    It attacks player above
+    """
+    WAIT_TIME = 30
+
+    def __init__(self, pos):
+        """
+        Initialize the crab entity
+        :param pos: initial position
+        """
+        animation = Animation({
+            'attack': 'resources/crab/07-Attack',
+            'idle': 'resources/crab/01-Idle',
+        })
+        super().__init__(animation, pos)
+
+        self.state = 'idle'
+
+        self.timer = 0
+        self.curr_state_timer = self.WAIT_TIME
+
+    def update(self, move=True):
+        """
+        Update the star entity
+        """
+
+        if self.timer >= self.curr_state_timer:
+            self.timer = 0
+            self.next_state()
+        self.timer += 1
+        super().update()
+
+    def scroll(self, dx):
+        """
+        Scroll the star entity
+        :param dx: scroll offset
+        """
+        super().scroll(dx)
+
+    def next_state(self):
+        if self.state == 'idle':
+            self.state = 'attack'
+            self.animation.change_state(self.state)
+            self.curr_state_timer = self.animation.get_full_time() * 2
+            self.velocity_y = -JUMP_HEIGHT
+        else:
+            self.state = 'idle'
+            self.animation.change_state(self.state)
+            self.curr_state_timer = self.WAIT_TIME
+
+
 class Player(Entity):
     """
     Player entity
     """
 
-    def __init__(self):
+    def __init__(self, pos):
         animation = Animation({
             'idle': 'resources/player/01-Idle',
             'run': 'resources/player/02-Run',
-            'jump': 'resources/player/03-Jump',
-            'fall': 'resources/player/04-Fall',
         })
-        super().__init__(animation)
+        super().__init__(animation, pos)
+
+        self.bounce_sound = pygame.mixer.Sound('resources/sounds/bounce.mp3')
+        self.bounce_sound.set_volume(0.2)
 
         self.health = 100
         self.jumped = False
+        self.inertia_x = 0
 
     def update(self, move=True):
         """
@@ -285,11 +341,11 @@ class Player(Entity):
         """
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_a] and self.rect.left > 0:
+        if keys[pygame.K_a]:
             self.velocity_x = -c.MOVE_STEP
             self.animation.change_state('run')
             self.animation.change_direction(True)
-        elif keys[pygame.K_d] and self.rect.right < c.WINDOW[0]:
+        elif keys[pygame.K_d]:
             self.velocity_x = c.MOVE_STEP
             self.animation.change_state('run')
             self.animation.change_direction(False)
@@ -300,5 +356,9 @@ class Player(Entity):
         if keys[pygame.K_SPACE] and self.velocity_y == 0 and not self.jumped:
             self.jumped = True
             self.velocity_y = -c.JUMP_HEIGHT
+            pygame.mixer.Sound.play(self.bounce_sound)
+
+        self.velocity_x += self.inertia_x
+        self.inertia_x = 0
 
         super().update()

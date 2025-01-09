@@ -12,9 +12,11 @@ HEALTH_BAR_PATH = 'resources/ui/health.png'
 
 
 class ScrollingBackground:
-    def __init__(self, speed):
+    def __init__(self, dims):
+        self.window = dims
+
         bg_img = pygame.image.load(BG_PATH).convert()
-        bg_scaled = pygame.transform.scale(bg_img, c.WINDOW)
+        bg_scaled = pygame.transform.scale(bg_img, dims)
         self.bg_img = bg_scaled
 
         cloud_img = pygame.image.load(CLOUD_PATH).convert_alpha()
@@ -25,7 +27,7 @@ class ScrollingBackground:
         self.water_reflex = Animation({'water': WATER_REFLEX_PATH}, scale=2)
         self.water_reflect = Animation({'water': WATER_REFLECT_PATH}, scale=4)
 
-        self.speed = speed
+        self.speed = c.BG_ANIMATION_SPEED
         self.x1 = 0
         self.x2 = -self.cloud_img.get_width()
 
@@ -57,15 +59,18 @@ class ScrollingBackground:
 
         screen.blit(self.bg_img, (0, 0))
 
-        screen.blit(self.health_bar, (20, 20))
-        bar_prog = health * 304 / 100
-        pygame.draw.rect(screen, pygame.color.Color('Red'), (88, 48, bar_prog, 8))
-
         screen.blit(self.cloud_img, (self.x1, 180))
         screen.blit(self.cloud_img, (self.x2, 180))
         screen.blit(self.water_reflect.get_image(), (0, 500))
-        screen.blit(self.water_reflect.get_image(), (c.WINDOW[0] // 2, 500))
-        for i in range(0, c.WINDOW[0], 384):
-            screen.blit(self.water_anim.get_image(), (i, c.WINDOW[1] - 64))
-            screen.blit(self.water_reflex.get_image(), (i, c.WINDOW[1] - 60))
-            screen.blit(self.water_reflex.get_image(), (i + 128, c.WINDOW[1] - 60))
+        screen.blit(self.water_reflect.get_image(), (self.window[0] // 2, 500))
+        for i in range(0, self.window[0], 384):
+            screen.blit(self.water_anim.get_image(), (i, self.window[1] - 64))
+            screen.blit(self.water_reflex.get_image(), (i, self.window[1] - 60))
+            screen.blit(self.water_reflex.get_image(), (i + 128, self.window[1] - 60))
+
+        self.draw_health_bar(screen, health)
+
+    def draw_health_bar(self, screen, health):
+        screen.blit(self.health_bar, (20, 20))
+        bar_prog = health * 304 / 100
+        pygame.draw.rect(screen, pygame.color.Color('Red'), (88, 48, bar_prog, 8))

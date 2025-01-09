@@ -7,6 +7,7 @@ import constants as c
 import generator
 from background import ScrollingBackground
 from entities import Player
+from src.animator import DamageOverlay
 from terrain import Chunk
 from ui import LostUI
 
@@ -68,35 +69,8 @@ def check_single_collision(player, block):
             player.velocity_y = 0
             player.jumped = False
 
-
-def scroll_map(player, chunks):
-    """
-    Scroll the map if the player is on the right side of the window
-    :param player: player sprite
-    :param chunks: all chunks
-    """
-    if player.rect.right > c.WINDOW[0] / 2:
-        player.scroll(c.MOVE_STEP)
-        for chunk in chunks:
-            chunk.scroll(c.MOVE_STEP)
-
-
-def generate_chunks(chunks):
-    """
-    Generate new chunks if needed and remove old chunks
-    :param chunks: current chunks array
-    """
-
-    # Generate new chunks if needed
-    if c.WINDOW[0] > chunks[-1].get_end_position():
-        new_chunk_position = [chunks[-1].get_end_position(), 0]
-        new_chunk = generator.gen_chunk(new_chunk_position)
-        chunks.append(new_chunk)
-
-    # Remove old chunks if needed
-    if chunks[0].get_end_position() < 0:
-        chunk = chunks.pop(0)
-        chunk.entities.remove()
+        return True
+    return False
 
 
 def handle_events():
@@ -104,7 +78,8 @@ def handle_events():
     Handle pygame events
     """
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if (event.type == pygame.QUIT or
+                (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE)):
             pygame.quit()
             sys.exit()
 
@@ -137,73 +112,139 @@ def update_chunk(screen, chunk, player):
         if e.collisions:
             check_single_collision(player, e)
 
+    for entity in chunk.entities:
+        if entity.collisions and player.rect.bottom == entity.rect.top:
+            player.inertia_x = entity.velocity_x
+
+
+class Game:
+    def __init__(self):
+        self.damage_sound = pygame.mixer.Sound('resources/sounds/damage.mp3')
+        self.loose_sound = pygame.mixer.Sound('resources/sounds/loose.mp3')
+        pygame.mixer.music.load('resources/sounds/music.mp3')
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(loops=1000)
+
+        self.screen = pygame.display.set_mode(c.WINDOW)
+        self.window = self.screen.get_size()
+        pygame.display.set_caption("The pirate game")
+
+        self.all_sprites = pygame.sprite.Group()
+        middle = [self.window[0] // 2, self.window[1] // 2]
+        self.player = Player(middle)
+        self.all_sprites.add(self.player)
+
+        self.background = ScrollingBackground(self.window)
+        self.chunks = [Chunk(c.INITIAL_CHUNK_GRID, [0, 0])]
+        self.chunk_generator = generator.ChunkGenerator(self.window)
+        self.red_overlay = DamageOverlay(self.window)
+        self.lost_ui = LostUI(self.window)
+
+        self.lost = False
+        self.damaged = False
+
+    def handle_lost(self):
+        self.lost_ui.draw(self.screen)
+        if self.lost_ui.on_click():
+            self.__init__()
+
+    def damage_player(self):
+        self.player.health -= 2
+        self.red_overlay.draw(self.screen)
+        screen_shake(self.screen)
+        if not self.damaged:
+            pygame.mixer.Sound.play(self.damage_sound)
+
+        if self.player.health <= 0:
+            self.loose()
+
+    def loose(self):
+        self.lost = True
+        self.player.health = 0
+        self.background.draw_health_bar(self.screen, self.player.health)
+        self.red_overlay.draw(self.screen)
+        pygame.mixer.music.stop()
+        pygame.mixer.Sound.play(self.loose_sound)
+
+    def scroll_map(self, player, chunks):
+        """
+        Scroll the map if the player is on the right side of the window
+        :param player: player sprite
+        :param chunks: all chunks
+        """
+        if player.rect.right > self.window[0] / 2 and player.velocity_x > 0:
+            player.scroll(player.velocity_x)
+            for chunk in chunks:
+                chunk.scroll(player.velocity_x)
+
+    def generate_chunks(self, chunks):
+        """
+        Generate new chunks if needed and remove old chunks
+        :param chunks: current chunks array
+        """
+
+        # Generate new chunks if needed
+        if self.window[0] > chunks[-1].get_end_position():
+            new_chunk_position = [chunks[-1].get_end_position(), 0]
+            new_chunk = self.chunk_generator.gen_chunk(new_chunk_position)
+            chunks.append(new_chunk)
+
+        # Remove old chunks if needed
+        if chunks[0].get_end_position() < 0:
+            chunk = chunks.pop(0)
+            chunk.entities.remove()
+
+    def handle_loop(self):
+        if self.lost:
+            self.handle_lost()
+            return
+
+        self.all_sprites.update()
+        self.background.update()
+
+        self.scroll_map(self.player, self.chunks)
+        self.generate_chunks(self.chunks)
+        check_chunk_collisions(self.player, self.chunks)
+
+        self.background.draw(self.screen, self.player.health)
+
+        collision = False
+        for chunk in self.chunks:
+            update_chunk(self.screen, chunk, self.player)
+
+            if pygame.sprite.spritecollide(self.player, chunk.entities, False):
+                collision = True
+
+            if c.DEBUG:
+                pygame.draw.line(self.screen,
+                                 (255, 0, 0),
+                                 (chunk.get_end_position(), 0), (chunk.get_end_position(), self.window), 2)
+
+        self.all_sprites.draw(self.screen)
+
+        if collision:
+            self.damage_player()
+            self.damaged = True
+        else:
+            self.damaged = False
+
+        if self.player.rect.bottom >= self.window[1]:
+            self.loose()
+
 
 def main():
     pygame.display.init()
     pygame.font.init()
+    pygame.mixer.init()
 
-    screen = pygame.display.set_mode(c.WINDOW)
-    pygame.display.set_caption("The pirate game")
-
-    all_sprites = pygame.sprite.Group()
-    player = Player()
-    all_sprites.add(player)
-
-    background = ScrollingBackground(2)
-    chunks = [Chunk(c.INITIAL_CHUNK_GRID, [0, 0])]
-
-    red_overlay = pygame.Surface(c.WINDOW)
-    red_overlay.set_alpha(64)
-    red_overlay.fill((255, 0, 0))
-
-    lost_ui = LostUI()
+    game = Game()
 
     clock = pygame.time.Clock()
     while True:
         handle_events()
-
-        if player.health < 0:
-            lost_ui.draw(screen)
-            pygame.display.flip()
-            clock.tick(60)
-            continue
-
-        all_sprites.update()
-        background.update()
-
-        scroll_map(player, chunks)
-        generate_chunks(chunks)
-        check_chunk_collisions(player, chunks)
-
-        #screen.fill((0, 0, 0))
-
-        background.draw(screen, player.health)
-
-        for chunk in chunks:
-            update_chunk(screen, chunk, player)
-
-            collide_player = pygame.sprite.spritecollide(player, chunk.entities, False)
-            if collide_player:
-                player.health -= 2
-                screen.blit(red_overlay, (0, 0))
-                screen_shake(screen)
-
-            # DEBUG
-            # pygame.draw.line(screen, (255, 0, 0), (chunk.get_end_position(), 0), (chunk.get_end_position(), c.WINDOW[1]), 2)
-
-        if player.rect.bottom == c.WINDOW[1]:
-            player.health -= 10
-            screen.blit(red_overlay, (0, 0))
-            screen_shake(screen)
-
-        all_sprites.draw(screen)
+        game.handle_loop()
 
         pygame.display.flip()
-
-        fps = int(clock.get_fps())
-        if fps < 50:
-            print(fps)
-
         clock.tick(60)
 
 

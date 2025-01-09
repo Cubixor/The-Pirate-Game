@@ -1,20 +1,28 @@
 import pygame
 
-import constants as c
-
 BG_PATH = 'resources/ui/bg.png'
 BTN_PATH = 'resources/ui/button.png'
+LOST_PATH = 'resources/ui/lost.png'
 
 
 class LostUI:
-    def __init__(self):
+    def __init__(self, dims):
         bg = pygame.image.load(BG_PATH).convert_alpha()
         self.bg = pygame.transform.scale(bg, (bg.get_width() * 4, bg.get_height() * 4))
-        self.bg_loc = (c.WINDOW[0] // 2 - self.bg.get_width() // 2, c.WINDOW[1] // 2 - self.bg.get_height() // 2)
+        self.bg_loc = (dims[0] // 2 - self.bg.get_width() // 2, dims[1] // 2 - self.bg.get_height() // 2)
 
-        font = pygame.font.Font(None, 72)
-        self.text = font.render('YOU LOST!', True, (0, 0, 0))
-        self.text_loc = (c.WINDOW[0] // 2 - self.text.get_width() // 2, c.WINDOW[1] // 3 - self.text.get_height() // 2)
+        self.text = pygame.image.load(LOST_PATH).convert_alpha()
+        self.text_loc = (dims[0] // 2 - self.text.get_width() // 2, dims[1] // 2.5 - self.text.get_height() // 2)
+
+        self.btn = pygame.image.load(BTN_PATH).convert_alpha()
+        self.btn_loc = (dims[0] // 2 - self.btn.get_width() // 2, dims[1] // 3 * 2 - self.btn.get_height() // 2)
+        self.btn_rect = self.btn.get_rect().move(self.btn_loc)
+
+    def on_click(self):
+        # Check if clicked on btn
+        mouse_pos = pygame.mouse.get_pos()
+        if pygame.mouse.get_pressed()[0] and self.btn_rect.collidepoint(mouse_pos[0], mouse_pos[1]):
+            return True
 
     def draw(self, screen):
         """
@@ -24,27 +32,4 @@ class LostUI:
         """
         screen.blit(self.bg, self.bg_loc)
         screen.blit(self.text, self.text_loc)
-
-class StartUI:
-    def __init__(self):
-        bg = pygame.image.load(BG_PATH).convert_alpha()
-        self.bg = pygame.transform.scale(bg, (bg.get_width() * 4, bg.get_height() * 4))
-        self.bg_loc = (c.WINDOW[0] // 2 - self.bg.get_width() // 2, c.WINDOW[1] // 2 - self.bg.get_height() // 2)
-
-        font = pygame.font.Font(None, 34)
-
-        btn = pygame.image.load(BTN_PATH).convert_alpha()
-        self.button = pygame.transform.scale(btn, (btn.get_width() * 6, btn.get_height() * 6))
-        self.button_loc = (c.WINDOW[0] // 2 - self.button.get_width() // 2, c.WINDOW[1] // 2 - self.button.get_height() // 2)
-        self.text = font.render('START', True, (0, 0, 0))
-        self.text_loc = (c.WINDOW[0] // 2 - self.text.get_width() // 2, c.WINDOW[1] // 2 - self.text.get_height() // 2)
-
-    def draw(self, screen):
-            """
-            Draw the start UI
-            :param screen: screen instance
-            :return:
-            """
-            screen.blit(self.bg, self.bg_loc)
-            screen.blit(self.button, self.button_loc)
-            screen.blit(self.text, self.text_loc)
+        screen.blit(self.btn, self.btn_loc)
