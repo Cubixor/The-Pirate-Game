@@ -37,8 +37,11 @@ class ScrollingBackground:
         self.x2 = -self.cloud_img.get_width()
 
         health_img = pygame.image.load(HEALTH_BAR_PATH).convert_alpha()
-        health_img_scaled = pygame.transform.scale(health_img, (health_img.get_width() * 4, health_img.get_height() * 4))
+        health_size = (health_img.get_width() * 4, health_img.get_height() * 4)
+        health_img_scaled = pygame.transform.scale(health_img, health_size)
         self.health_bar = health_img_scaled
+
+        self.font = pygame.font.Font(None, 60)
 
     def update(self):
         """
@@ -55,7 +58,7 @@ class ScrollingBackground:
         self.water_reflex.update()
         self.water_reflect.update()
 
-    def draw(self, screen, health):
+    def draw(self, screen, health, score):
         """
         Draw background images
         :param screen: screen instance
@@ -74,8 +77,14 @@ class ScrollingBackground:
             screen.blit(self.water_reflex.get_image(), (i + 128, self.window[1] - 60))
 
         self.draw_health_bar(screen, health)
+        self.draw_score(screen, score)
 
     def draw_health_bar(self, screen, health):
         screen.blit(self.health_bar, (20, 20))
         bar_prog = health * 304 / 100
         pygame.draw.rect(screen, pygame.color.Color('Red'), (88, 48, bar_prog, 8))
+
+    def draw_score(self, screen, score):
+        score_text = self.font.render(f"Score: {score}", True, (255, 255, 255))
+        pos = (self.window[0] - score_text.get_width() - 30, score_text.get_height())
+        screen.blit(score_text, pos)

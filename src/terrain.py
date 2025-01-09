@@ -37,10 +37,10 @@ def generate_terrain(grid):
                 continue
 
             position = (col_index * c.BLOCK_SIZE, row_index * c.BLOCK_SIZE)
-            if cell == 1:  # Assuming 1 represents a terrain block
+            if cell == 1:
                 terrain_block = Terrain(STONE_IMG_PATH, position)
                 terrain_sprites.add(terrain_block)
-            if cell == 2:  # Assuming 1 represents a terrain block
+            if cell == 2:
                 terrain_block = Terrain(GRASS_IMG_PATH, position)
                 terrain_sprites.add(terrain_block)
     return terrain_sprites

@@ -7,7 +7,7 @@ import constants as c
 import generator
 from background import ScrollingBackground
 from entities import Player
-from src.animator import DamageOverlay
+from animator import DamageOverlay
 from terrain import Chunk
 from ui import LostUI
 
@@ -142,6 +142,10 @@ class Game:
 
         self.lost = False
         self.damaged = False
+        self.score = 0
+
+    def get_score(self):
+        return self.score//64
 
     def handle_lost(self):
         """
@@ -189,6 +193,7 @@ class Game:
             player.scroll(player.velocity_x)
             for chunk in chunks:
                 chunk.scroll(player.velocity_x)
+            self.score += player.velocity_x
 
     def generate_chunks(self, chunks):
         """
@@ -223,7 +228,7 @@ class Game:
         self.generate_chunks(self.chunks)
         check_chunk_collisions(self.player, self.chunks)
 
-        self.background.draw(self.screen, self.player.health)
+        self.background.draw(self.screen, self.player.health, self.get_score())
 
         collision = False
         for chunk in self.chunks:

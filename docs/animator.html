@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module animator</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">animator</strong></td>
+<td class="extra"><a href="../src">index</a><br><a href="file:c%3A%5Cusers%5Ckubam%5Conedrive%20-%20politechnika%20%C5%82%C3%B3dzka%5Cprogramming%5Cgame%5Csrc%5Canimator.py">c:\users\kubam\onedrive - politechnika łódzka\programming\game\src\animator.py</a></td></tr></table>
+    <p></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="constants.html">constants</a><br>
+</td><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"><a href="pygame.html">pygame</a><br>
+</td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="animator.html#Animation">Animation</a>
+</dt><dt class="heading-text"><a href="animator.html#DamageOverlay">DamageOverlay</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Animation">class <strong>Animation</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Animation">Animation</a>(image_paths,&nbsp;scale=3)<br>
+&nbsp;<br>
+Class&nbsp;for&nbsp;animating&nbsp;objects<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Animation-__init__"><strong>__init__</strong></a>(self, image_paths, scale=3)</dt><dd><span class="code">Initialize&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;with&nbsp;the&nbsp;images<br>
+:param&nbsp;image_paths:&nbsp;map&nbsp;with&nbsp;paths&nbsp;to&nbsp;images&nbsp;for&nbsp;each&nbsp;state<br>
+:param&nbsp;scale:&nbsp;scale&nbsp;of&nbsp;the&nbsp;images</span></dd></dl>
+
+<dl><dt><a name="Animation-change_direction"><strong>change_direction</strong></a>(self, flipped)</dt><dd><span class="code">Change&nbsp;the&nbsp;direction&nbsp;of&nbsp;the&nbsp;images<br>
+:param&nbsp;flipped:&nbsp;should&nbsp;images&nbsp;be&nbsp;flipped</span></dd></dl>
+
+<dl><dt><a name="Animation-change_state"><strong>change_state</strong></a>(self, state)</dt><dd><span class="code">Change&nbsp;the&nbsp;current&nbsp;animation&nbsp;state&nbsp;(switch&nbsp;to&nbsp;another&nbsp;animation)<br>
+:param&nbsp;state:&nbsp;state&nbsp;to&nbsp;switch&nbsp;to</span></dd></dl>
+
+<dl><dt><a name="Animation-get_full_time"><strong>get_full_time</strong></a>(self)</dt><dd><span class="code">:return:&nbsp;how&nbsp;long&nbsp;a&nbsp;full&nbsp;animation&nbsp;cycle&nbsp;takes</span></dd></dl>
+
+<dl><dt><a name="Animation-get_image"><strong>get_image</strong></a>(self)</dt><dd><span class="code">:return:&nbsp;current&nbsp;animation&nbsp;image</span></dd></dl>
+
+<dl><dt><a name="Animation-update"><strong>update</strong></a>(self)</dt><dd><span class="code">Update&nbsp;the&nbsp;animation,&nbsp;change&nbsp;frame&nbsp;if&nbsp;needed</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DamageOverlay">class <strong>DamageOverlay</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#DamageOverlay">DamageOverlay</a>(dim)<br>
+&nbsp;<br>
+Class&nbsp;for&nbsp;displaying&nbsp;red&nbsp;overlay&nbsp;when&nbsp;player&nbsp;is&nbsp;hit<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="DamageOverlay-__init__"><strong>__init__</strong></a>(self, dim)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="DamageOverlay-draw"><strong>draw</strong></a>(self, screen)</dt><dd><span class="code">Draws&nbsp;the&nbsp;overlay&nbsp;on&nbsp;the&nbsp;screen<br>
+:param&nbsp;screen:&nbsp;screen&nbsp;to&nbsp;draw&nbsp;on<br>
+:return:</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

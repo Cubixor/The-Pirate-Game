@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module generator</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">generator</strong></td>
+<td class="extra"><a href="../src">index</a><br><a href="file:c%3A%5Cusers%5Ckubam%5Conedrive%20-%20politechnika%20%C5%82%C3%B3dzka%5Cprogramming%5Cgame%5Csrc%5Cgenerator.py">c:\users\kubam\onedrive - politechnika łódzka\programming\game\src\generator.py</a></td></tr></table>
+    <p></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="constants.html">constants</a><br>
+</td><td class="multicolumn"><a href="entities.html">entities</a><br>
+</td><td class="multicolumn"><a href="random.html">random</a><br>
+</td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="generator.html#ChunkGenerator">ChunkGenerator</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="ChunkGenerator">class <strong>ChunkGenerator</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#ChunkGenerator">ChunkGenerator</a>(dims)<br>
+&nbsp;<br>
+Class&nbsp;used&nbsp;for&nbsp;randomly&nbsp;generating&nbsp;new&nbsp;chunks<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="ChunkGenerator-__init__"><strong>__init__</strong></a>(self, dims)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="ChunkGenerator-gen_chunk"><strong>gen_chunk</strong></a>(self, pos)</dt><dd><span class="code">Generate&nbsp;a&nbsp;random&nbsp;chunk,&nbsp;different&nbsp;from&nbsp;the&nbsp;previous&nbsp;one<br>
+:param&nbsp;pos:&nbsp;chunk&nbsp;position<br>
+:return:&nbsp;generated&nbsp;chunk</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-gen_crab_chunk"><strong>gen_crab_chunk</strong></a>(pos, window)</dt><dd><span class="code">Generate&nbsp;a&nbsp;chunk&nbsp;with&nbsp;a&nbsp;crab&nbsp;entity<br>
+:param&nbsp;pos:&nbsp;chunk&nbsp;position<br>
+:param&nbsp;window:&nbsp;window&nbsp;dimensions<br>
+:return:&nbsp;generated&nbsp;chunk</span></dd></dl>
+ <dl><dt><a name="-gen_crab_grid"><strong>gen_crab_grid</strong></a>(start_height=1)</dt><dd><span class="code">Generates&nbsp;a&nbsp;grid&nbsp;with&nbsp;2&nbsp;levels,&nbsp;with&nbsp;a&nbsp;step&nbsp;in&nbsp;the&nbsp;middle<br>
+:param&nbsp;start_height:&nbsp;height&nbsp;of&nbsp;the&nbsp;base&nbsp;level<br>
+:return:</span></dd></dl>
+ <dl><dt><a name="-gen_gap_chunk"><strong>gen_gap_chunk</strong></a>(pos, window)</dt><dd><span class="code">Create&nbsp;an&nbsp;empty&nbsp;chunk<br>
+:param&nbsp;pos:&nbsp;chunk&nbsp;position<br>
+:param&nbsp;window:&nbsp;window&nbsp;dimensions<br>
+:return:&nbsp;generated&nbsp;chunk</span></dd></dl>
+ <dl><dt><a name="-gen_gap_grid"><strong>gen_gap_grid</strong></a>(min_width=2, max_width=5)</dt><dd><span class="code">Generates&nbsp;an&nbsp;empty&nbsp;grid<br>
+:param&nbsp;min_width:&nbsp;minimum&nbsp;width<br>
+:param&nbsp;max_width:&nbsp;maximum&nbsp;width<br>
+:return:</span></dd></dl>
+ <dl><dt><a name="-gen_platform_grid"><strong>gen_platform_grid</strong></a>(grid, height, start, end)</dt><dd><span class="code">Generates&nbsp;a&nbsp;platform&nbsp;in&nbsp;the&nbsp;grid,&nbsp;of&nbsp;the&nbsp;given&nbsp;height,&nbsp;from&nbsp;start&nbsp;to&nbsp;end<br>
+:param&nbsp;grid:&nbsp;a&nbsp;grid&nbsp;to&nbsp;modify<br>
+:param&nbsp;height:&nbsp;platform&nbsp;height<br>
+:param&nbsp;start:&nbsp;platform&nbsp;start&nbsp;column<br>
+:param&nbsp;end:&nbsp;platform&nbsp;end&nbsp;column</span></dd></dl>
+ <dl><dt><a name="-gen_shell_chunk"><strong>gen_shell_chunk</strong></a>(pos, window)</dt><dd><span class="code">Generates&nbsp;a&nbsp;chunk&nbsp;with&nbsp;shell&nbsp;entity<br>
+:param&nbsp;pos:&nbsp;chunk&nbsp;position<br>
+:param&nbsp;window:&nbsp;window&nbsp;dimensions<br>
+:return:&nbsp;generated&nbsp;chunk</span></dd></dl>
+ <dl><dt><a name="-gen_shell_grid"><strong>gen_shell_grid</strong></a>(start_height=2)</dt><dd><span class="code">Generates&nbsp;a&nbsp;grid&nbsp;at&nbsp;two&nbsp;levels,&nbsp;with&nbsp;a&nbsp;step&nbsp;on&nbsp;the&nbsp;right<br>
+:param&nbsp;start_height:&nbsp;height&nbsp;of&nbsp;the&nbsp;first&nbsp;level<br>
+:return:</span></dd></dl>
+ <dl><dt><a name="-gen_ship_chunk"><strong>gen_ship_chunk</strong></a>(pos, window)</dt><dd><span class="code">Create&nbsp;a&nbsp;chunk&nbsp;with&nbsp;a&nbsp;ship&nbsp;entity<br>
+:param&nbsp;pos:&nbsp;chunk&nbsp;position<br>
+:param&nbsp;window:&nbsp;window&nbsp;dimensions<br>
+:return:&nbsp;generated&nbsp;chunk</span></dd></dl>
+ <dl><dt><a name="-gen_star_chunk"><strong>gen_star_chunk</strong></a>(pos, window)</dt><dd><span class="code">Generates&nbsp;a&nbsp;chunk&nbsp;with&nbsp;star&nbsp;entity<br>
+:param&nbsp;pos:&nbsp;chunk&nbsp;position<br>
+:param&nbsp;window:&nbsp;window&nbsp;dimensions<br>
+:return:&nbsp;generated&nbsp;chunk</span></dd></dl>
+ <dl><dt><a name="-gen_star_grid"><strong>gen_star_grid</strong></a>(platform_height=3)</dt><dd><span class="code">Generates&nbsp;a&nbsp;flat&nbsp;grid<br>
+:param&nbsp;platform_height:&nbsp;height&nbsp;of&nbsp;the&nbsp;platform<br>
+:return:</span></dd></dl>
+ <dl><dt><a name="-gen_tower_chunk"><strong>gen_tower_chunk</strong></a>(pos, window)</dt><dd><span class="code">Generates&nbsp;a&nbsp;chunk&nbsp;with&nbsp;towers<br>
+:param&nbsp;pos:&nbsp;chunk&nbsp;position<br>
+:param&nbsp;window:&nbsp;window&nbsp;dimensions<br>
+:return:&nbsp;generated&nbsp;chunk</span></dd></dl>
+ <dl><dt><a name="-generate_tower_grid"><strong>generate_tower_grid</strong></a>()</dt><dd><span class="code">Generate&nbsp;a&nbsp;grid&nbsp;with&nbsp;towers<br>
+:return:</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>CHUNK_TYPES</strong> = [&lt;function gen_shell_chunk&gt;, &lt;function gen_star_chunk&gt;, &lt;function gen_gap_chunk&gt;, &lt;function gen_ship_chunk&gt;, &lt;function gen_crab_chunk&gt;, &lt;function gen_tower_chunk&gt;, &lt;function gen_tower_chunk&gt;]</td></tr></table>
+</body></html>

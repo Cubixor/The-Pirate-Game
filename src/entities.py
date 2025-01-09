@@ -4,7 +4,7 @@ import pygame
 
 import constants as c
 from animator import Animation
-from src.constants import JUMP_HEIGHT
+from constants import JUMP_HEIGHT
 
 
 class Entity(pygame.sprite.Sprite):
@@ -44,7 +44,7 @@ class Entity(pygame.sprite.Sprite):
         Apply movement to the entity, based on its velocity and position
         """
         if self.gravity:
-            self.velocity_y += c.GRAVITY  # Adjust gravity effect
+            self.velocity_y += c.GRAVITY
         self.rect.y += self.velocity_y
         self.rect.x += self.velocity_x
 
@@ -344,11 +344,11 @@ class Player(Entity):
         """
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_a]:
+        if keys[pygame.K_a] or keys[pygame.K_LEFT]:
             self.velocity_x = -c.MOVE_STEP
             self.animation.change_state('run')
             self.animation.change_direction(True)
-        elif keys[pygame.K_d]:
+        elif keys[pygame.K_d] or keys[pygame.K_RIGHT]:
             self.velocity_x = c.MOVE_STEP
             self.animation.change_state('run')
             self.animation.change_direction(False)

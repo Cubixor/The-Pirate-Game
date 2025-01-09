@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module game</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">game</strong></td>
+<td class="extra"><a href="../src">index</a><br><a href="file:c%3A%5Cusers%5Ckubam%5Conedrive%20-%20politechnika%20%C5%82%C3%B3dzka%5Cprogramming%5Cgame%5Csrc%5Cgame.py">c:\users\kubam\onedrive - politechnika łódzka\programming\game\src\game.py</a></td></tr></table>
+    <p></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="constants.html">constants</a><br>
+<a href="generator.html">generator</a><br>
+</td><td class="multicolumn"><a href="pygame.html">pygame</a><br>
+<a href="random.html">random</a><br>
+</td><td class="multicolumn"><a href="sys.html">sys</a><br>
+</td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="game.html#Game">Game</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Game">class <strong>Game</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor"><span class="code">&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Game-__init__"><strong>__init__</strong></a>(self)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="Game-damage_player"><strong>damage_player</strong></a>(self)</dt><dd><span class="code">Damage&nbsp;the&nbsp;player&nbsp;-&nbsp;reduce&nbsp;health,&nbsp;shake&nbsp;the&nbsp;screen,<br>
+&nbsp;add&nbsp;red&nbsp;overlay&nbsp;and&nbsp;play&nbsp;the&nbsp;damage&nbsp;sound<br>
+:return:</span></dd></dl>
+
+<dl><dt><a name="Game-generate_chunks"><strong>generate_chunks</strong></a>(self, chunks)</dt><dd><span class="code">Generate&nbsp;new&nbsp;chunks&nbsp;if&nbsp;needed&nbsp;and&nbsp;remove&nbsp;old&nbsp;chunks<br>
+:param&nbsp;chunks:&nbsp;current&nbsp;chunks&nbsp;array</span></dd></dl>
+
+<dl><dt><a name="Game-get_score"><strong>get_score</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Game-handle_loop"><strong>handle_loop</strong></a>(self)</dt><dd><span class="code">Handle&nbsp;the&nbsp;main&nbsp;game&nbsp;loop<br>
+:return:</span></dd></dl>
+
+<dl><dt><a name="Game-handle_lost"><strong>handle_lost</strong></a>(self)</dt><dd><span class="code">Handle&nbsp;the&nbsp;lost&nbsp;state<br>
+:return:</span></dd></dl>
+
+<dl><dt><a name="Game-loose"><strong>loose</strong></a>(self)</dt><dd><span class="code">Change&nbsp;to&nbsp;the&nbsp;lost&nbsp;state<br>
+:return:</span></dd></dl>
+
+<dl><dt><a name="Game-scroll_map"><strong>scroll_map</strong></a>(self, player, chunks)</dt><dd><span class="code">Scroll&nbsp;the&nbsp;map&nbsp;if&nbsp;the&nbsp;player&nbsp;is&nbsp;on&nbsp;the&nbsp;right&nbsp;side&nbsp;of&nbsp;the&nbsp;window<br>
+:param&nbsp;player:&nbsp;player&nbsp;sprite<br>
+:param&nbsp;chunks:&nbsp;all&nbsp;chunks</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-check_chunk_collisions"><strong>check_chunk_collisions</strong></a>(player, chunks)</dt><dd><span class="code">Check&nbsp;for&nbsp;collisions&nbsp;between&nbsp;the&nbsp;player&nbsp;and&nbsp;the&nbsp;terrain&nbsp;sprites&nbsp;in&nbsp;the&nbsp;chunks<br>
+:param&nbsp;player:&nbsp;player&nbsp;sprite<br>
+:param&nbsp;chunks:&nbsp;chunk&nbsp;objects</span></dd></dl>
+ <dl><dt><a name="-check_group_collisions"><strong>check_group_collisions</strong></a>(player, sprites)</dt><dd><span class="code">Check&nbsp;for&nbsp;collisions&nbsp;between&nbsp;the&nbsp;player&nbsp;and&nbsp;the&nbsp;sprites&nbsp;in&nbsp;the&nbsp;group<br>
+:param&nbsp;player:&nbsp;player&nbsp;sprite<br>
+:param&nbsp;sprites:&nbsp;sprite&nbsp;group</span></dd></dl>
+ <dl><dt><a name="-check_single_collision"><strong>check_single_collision</strong></a>(player, block)</dt><dd><span class="code">Check&nbsp;for&nbsp;collisions&nbsp;between&nbsp;the&nbsp;player&nbsp;and&nbsp;a&nbsp;single&nbsp;block&nbsp;(sprite)<br>
+:param&nbsp;player:&nbsp;player&nbsp;sprite<br>
+:param&nbsp;block:&nbsp;block&nbsp;sprite</span></dd></dl>
+ <dl><dt><a name="-handle_events"><strong>handle_events</strong></a>()</dt><dd><span class="code">Handle&nbsp;pygame&nbsp;events</span></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt></dl>
+ <dl><dt><a name="-screen_shake"><strong>screen_shake</strong></a>(screen, intensity=5)</dt><dd><span class="code">Shake&nbsp;the&nbsp;screen<br>
+:param&nbsp;screen:&nbsp;screen&nbsp;instance<br>
+:param&nbsp;intensity:&nbsp;shake&nbsp;intensity</span></dd></dl>
+ <dl><dt><a name="-update_chunk"><strong>update_chunk</strong></a>(screen, chunk, player)</dt><dd><span class="code">Draw,&nbsp;update&nbsp;and&nbsp;check&nbsp;collisions&nbsp;for&nbsp;a&nbsp;chunk<br>
+:param&nbsp;screen:&nbsp;screen&nbsp;instance<br>
+:param&nbsp;chunk:&nbsp;chunk&nbsp;<a href="builtins.html#object">object</a><br>
+:param&nbsp;player:&nbsp;player&nbsp;sprite&nbsp;<a href="builtins.html#object">object</a><br>
+:return:</span></dd></dl>
+</td></tr></table>
+</body></html>
