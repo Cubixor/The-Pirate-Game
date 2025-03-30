@@ -5,9 +5,9 @@ import pygame
 
 import constants as c
 import generator
+from animator import DamageOverlay
 from background import ScrollingBackground
 from entities import Player
-from animator import DamageOverlay
 from terrain import Chunk
 from ui import LostUI
 
@@ -240,7 +240,7 @@ class Game:
             if c.DEBUG:
                 pygame.draw.line(self.screen,
                                  (255, 0, 0),
-                                 (chunk.get_end_position(), 0), (chunk.get_end_position(), self.window), 2)
+                                 (chunk.get_end_position(), 0), (chunk.get_end_position(), self.window[1]), 2)
 
         self.all_sprites.draw(self.screen)
 
